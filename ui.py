@@ -79,7 +79,7 @@ def render_board(state: RaceState) -> None:
         margin=dict(l=10, r=10, t=30, b=10),
         legend_title_text="Piece",
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 
 def render_ev_table(rs: RaceState, ev: dict) -> None:
@@ -95,7 +95,7 @@ def render_ev_table(rs: RaceState, ev: dict) -> None:
             }
         )
     df_ev = pd.DataFrame(data_ev)
-    st.dataframe(df_ev, use_container_width=True, hide_index=True)
+    st.dataframe(df_ev, width="stretch", hide_index=True)
 
 
 def render_placement_and_prediction_table(
@@ -117,7 +117,7 @@ def render_placement_and_prediction_table(
             row[f"EV round bet (T={T})"] = float(prediction_ev_round[T][p])
         data_place.append(row)
     df_place = pd.DataFrame(data_place)
-    st.dataframe(df_place, use_container_width=True, hide_index=True)
+    st.dataframe(df_place, width="stretch", hide_index=True)
 
 
 def render_race_win_probability_table(win_probs: dict) -> None:
@@ -133,7 +133,7 @@ def render_race_win_probability_table(win_probs: dict) -> None:
             row[f"EV race bet (T={T})"] = (T + 1) * row["P(win race)"] - 1
         data_race.append(row)
     df_race = pd.DataFrame(data_race)
-    st.dataframe(df_race, use_container_width=True, hide_index=True)
+    st.dataframe(df_race, width="stretch", hide_index=True)
 
 
 def render_race_loss_probability_table(loss_probs: dict) -> None:
@@ -149,7 +149,7 @@ def render_race_loss_probability_table(loss_probs: dict) -> None:
             row[f"EV race bet (T={T})"] = (T + 1) * row["P(lose race)"] - 1
         data_race.append(row)
     df_race = pd.DataFrame(data_race)
-    st.dataframe(df_race, use_container_width=True, hide_index=True)
+    st.dataframe(df_race, width="stretch", hide_index=True)
 
 
 def render_top_predictions(
@@ -217,7 +217,7 @@ def render_top_predictions(
     df_predictions = pd.DataFrame(predictions)
     df_predictions = df_predictions.sort_values("EV", ascending=False).head(10)
 
-    st.dataframe(df_predictions, use_container_width=True, hide_index=True)
+    st.dataframe(df_predictions, width="stretch", hide_index=True)
 
 
 

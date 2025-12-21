@@ -169,6 +169,17 @@ def run_app() -> None:
             st.markdown("### Odds for Next Round")
 
             # next_round_state and stats already computed above for draw EV display
+            # Defensive: if they weren't computed earlier (possible rerun timing), compute them now
+            if next_round_state is None or first_probs_next is None:
+                next_round_state = RaceState(
+                    values=rs.values.copy(),
+                    stacks={v: lst[:] for v, lst in rs.stacks.items()},
+                    draws_used_in_round=0,
+                    remaining_in_round=PIECES[:],
+                )
+                ev_next, first_probs_next, second_probs_next, prediction_ev_next = compute_end_of_round_stats_from_racestate(
+                    next_round_state
+                )
 
             # ---- Top 10 predictions ----
             render_top_predictions(
@@ -208,7 +219,7 @@ def run_app() -> None:
                     }
                 )
             df_ev = pd.DataFrame(data_ev)
-            st.dataframe(df_ev, use_container_width=True, hide_index=True)
+            st.dataframe(df_ev, width="stretch", hide_index=True)
 
             st.caption(f"Next round stats estimated via Monte Carlo with {sims} simulations from current state.")
         else:

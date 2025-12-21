@@ -29,5 +29,5 @@ COLOR_MAP = {
 }
 
 # UI Settings
-MONTE_CARLO_SIMULATIONS = 5000
-MONTE_CARLO_SIMULATIONS_DRAW = 1000  # sims per branch when valuing a draw action
+MONTE_CARLO_SIMULATIONS = 500
+MONTE_CARLO_SIMULATIONS_DRAW = 100  # sims per branch when valuing a draw action
