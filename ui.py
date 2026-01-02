@@ -105,6 +105,10 @@ def render_placement_and_prediction_table(
     label_suffix: str = "",
 ) -> None:
     """Render placement probabilities and prediction EV table."""
+    # Defensive: bail if stats are not available yet
+    if first_probs is None or second_probs is None or prediction_ev_round is None:
+        st.warning("Placement/prediction stats are not available yet.")
+        return
     st.markdown(f"#### End-of-round placement & short-term prediction EVs{label_suffix}")
     data_place = []
     for p in RANK_PIECES:
@@ -162,6 +166,11 @@ def render_top_predictions(
     draw_ev: float | None = None,
 ) -> None:
     """Render top 10 expected value predictions across all bet types (plus draw)."""
+    # Defensive: require metrics to be present
+    if first_probs is None or second_probs is None or prediction_ev_round is None or win_probs is None or loss_probs is None:
+        st.warning("Prediction metrics unavailable yet.")
+        return
+
     st.markdown("#### Top 10 Expected Value Predictions")
 
     predictions = []

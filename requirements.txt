@@ -1,0 +1,8 @@
+streamlit
+pandas
+plotly
+
+# Optional: pin versions for reproducible deploys, e.g.:
+# streamlit==1.20.0
+# pandas==1.5.3
+# plotly==5.15.0
